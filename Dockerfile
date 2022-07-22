@@ -14,10 +14,18 @@ RUN apt-get update \
 RUN pip install --no-cache-dir pandas boto3 xlrd==1.2.0 && pip install --upgrade pip
 
 ARG ARCHIVE_URL=http://archive.apache.org/dist
+
+# download spark 3
 ARG SPARK_VERSION=3.2.1
 ARG SPARK_HADOOP_VERSION=3.2
 RUN curl -sL --retry 3 "${ARCHIVE_URL}/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${SPARK_HADOOP_VERSION}.tgz" | tar xz  \
     && mv spark-${SPARK_VERSION}-bin-hadoop${SPARK_HADOOP_VERSION} /usr/local/spark-${SPARK_VERSION}
+
+# download spark 2
+ARG SPARK2_VERSION=2.4.7
+ARG SPARK2_HADOOP_VERSION=2.6
+RUN curl -sL --retry 3 "${ARCHIVE_URL}/spark/spark-${SPARK2_VERSION}/spark-${SPARK2_VERSION}-bin-hadoop${SPARK2_HADOOP_VERSION}.tgz" | tar xz  \
+    && mv spark-${SPARK2_VERSION}-bin-hadoop${SPARK2_HADOOP_VERSION} /usr/local/spark-${SPARK2_VERSION}
 
 RUN mkdir extra
 
