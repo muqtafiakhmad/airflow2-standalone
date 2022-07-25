@@ -1,5 +1,5 @@
 # Airflow 2 standalone docker-compose
-courtesy of Oliver Majaba
+courtesy of https://github.com/Verdado/
 ```sh
 ln -s [path to your dags-airflow2-repo] dags
 docker-compose build
