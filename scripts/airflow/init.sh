@@ -22,6 +22,9 @@ if [ "${SECURITY_ALREADY_INITIALIZED}" == "0" ]; then
 	cat /opt/airflow/extra/set_init.sql | psql -h ${DB__HOST} -p ${DB__PORT} -U ${DB__USERNAME} ${DB__NAME} -t
 fi
 
+# change Airflow sql_alchemy_conn to postgresql 
+sed -i "s/sql_alchemy_conn = .*/sql_alchemy_conn = postgres:\/\/airflow:airflow@postgres:5432\/airflow/g" /opt/airflow/airflow.cfg
+
 # Run scheduler 
 airflow scheduler &
 
